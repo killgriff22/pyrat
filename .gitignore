@@ -3,4 +3,5 @@
 /vscode
 -/dist/*
 -*.py
+-*.md
 *.*
