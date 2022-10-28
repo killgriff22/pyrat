@@ -1,7 +1,6 @@
-/dist
-/build
-/vscode
+/dist/*
+/build/*
+/vscode/*
+.DS_Store
 -/dist/*
--*.py
--*.md
-*.*
+*.json
