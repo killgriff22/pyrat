@@ -29,12 +29,16 @@ while True:
     print(colorama.Fore.RED,"please input the ip of the device to connect to",colorama.Fore.RESET)
     if not continueflag:
         ans=input(f"{colorama.Fore.RED}{colorama.Back.WHITE}>{colorama.Style.RESET_ALL}")
-    if not pattern.match(ans) or ans not in devices:
+    if not pattern.match(ans) and ans not in devices:
         print("please input an ip from the list")
     elif ans in devices and not pattern.match(ans):
-        ans=input(f"{colorama.Fore.RED}please enter the ip you want to manually connect to\n{colorama.Back.WHITE}>{colorama.Style.RESET_ALL}")
         continueflag=True
-    elif ans in devices and pattern.match(ans) or continueflag:
+        while continueflag:
+            ans=input(f"{colorama.Fore.RED}please enter the ip you want to manually connect to\n{colorama.Back.WHITE}>{colorama.Style.RESET_ALL}")
+            if pattern.match(ans):
+                continueflag = False
+        continueflag = True
+    elif (ans in devices and pattern.match(ans)) or continueflag:
         continueflag=False
         if not ans == "127.0.0.1":
             print(f"connecting to {colorama.Fore.CYAN}{ans}{colorama.Fore.RESET}")
