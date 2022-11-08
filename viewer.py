@@ -9,6 +9,7 @@ for device in devices:
 devices = copy2
 copy=devices
 tmp=[]
+devices.append("iptype")
 for device in devices:
     try:
         r=requests.post("http://"+device+":42069/check")
@@ -25,10 +26,15 @@ while True:
     for device in devices:
         print(colorama.Fore.GREEN,device,colorama.Fore.RESET)
     print(colorama.Fore.RED,"please input the ip of the device to connect to",colorama.Fore.RESET)
-    ans=input(f"{colorama.Fore.RED}{colorama.Back.WHITE}>{colorama.Style.RESET_ALL}")
+    if not continueflag:
+        ans=input(f"{colorama.Fore.RED}{colorama.Back.WHITE}>{colorama.Style.RESET_ALL}")
     if not pattern.match(ans) or ans not in devices:
         print("please input an ip from the list")
-    elif ans in devices and pattern.match(ans):
+    elif ans in devices and not pattern.match(ans):
+        ans=input(f"{colorama.Fore.RED}please enter the ip you want to manually connect to\n{colorama.Back.WHITE}>{colorama.Style.RESET_ALL}")
+        continueflag=True
+    elif ans in devices and pattern.match(ans) or continueflag:
+        continueflag=False
         if not ans == "127.0.0.1":
             print(f"connecting to {colorama.Fore.CYAN}{ans}{colorama.Fore.RESET}")
         elif ans == "127.0.0.1":
