@@ -9,6 +9,7 @@ for device in devices:
 devices = copy2
 copy=devices
 tmp=[]
+continueflag=False
 devices.append("iptype")
 for device in devices:
     try:
