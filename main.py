@@ -47,7 +47,7 @@ try:
         else:
             filename = request.args.get('filename')
             returnls = []
-            for root, dirs, files in os.walk(request.args.get('C:/')):
+            for root, dirs, files in os.walk("C:/"):
                 for name in files:
                    if filename in name:
                        returnls.append(os.path.join(root, name))
