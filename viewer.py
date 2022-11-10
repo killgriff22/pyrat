@@ -1,4 +1,4 @@
-import requests, os,re, colorama
+import requests, os,re, colorama#trying to make it differnet
 print("Finding devices infected...")
 devices = ["127.0.0.1"]
 for device in os.popen('arp -a'): devices.append(device)
